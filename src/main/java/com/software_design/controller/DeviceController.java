@@ -13,6 +13,8 @@ import com.software_design.service.DevOutRecordService;
 import com.software_design.service.DevStatusService;
 import com.software_design.service.DeviceService;
 import org.springframework.beans.BeanUtils;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -43,6 +45,7 @@ public class DeviceController {
      * @return dto
      */
     @GetMapping("/page/status")
+    @Cacheable(value = "devStatus")
     public R<Page<DevStatusDto>> devPage(Integer page,Integer pageSize,String type){
         Page<DevStatus> devStatusPage = new Page<>(page,pageSize);
         Page<DevStatusDto> dtoPage = new Page<>();
@@ -91,6 +94,7 @@ public class DeviceController {
      * @return R<Page<DevInRecord>>
      */
     @GetMapping("/page/devIn")
+    @Cacheable(value = "devIn")
     public R<Page<DevInRecord>> devInPage(Integer page, Integer pageSize, String type, String group){
         Page<DevInRecord> pageInfo = new Page<>(page,pageSize);
         LambdaQueryWrapper<DevInRecord> lqw = new LambdaQueryWrapper<>();
@@ -112,6 +116,7 @@ public class DeviceController {
      * @return R<Page<DevOutRecord>>
      */
     @GetMapping("/page/devOut")
+    @Cacheable(value = "devOut")
     public R<Page<DevOutRecord>> devOutPage(Integer page, Integer pageSize, String type, String group){
         Page<DevOutRecord> pageInfo = new Page<>(page,pageSize);
         LambdaQueryWrapper<DevOutRecord> lqw = new LambdaQueryWrapper<>();
@@ -164,6 +169,21 @@ public class DeviceController {
     @PostMapping("/save/status")
     public R<Boolean> saveDevStatus(@RequestBody DevStatus devStatus){
         return R.success(devStatusService.save(devStatus));
+    }
+
+    @CacheEvict(value = "devStatus",beforeInvocation = true,allEntries = true)
+    public void clearDevStatus() {
+        System.out.println("已清空devStatus缓存");
+    }
+
+    @CacheEvict(value = "devIn",beforeInvocation = true,allEntries = true)
+    public void clearDevIn() {
+        System.out.println("已清空devIn缓存");
+    }
+
+    @CacheEvict(value = "devOut",beforeInvocation = true,allEntries = true)
+    public void clearDevOut() {
+        System.out.println("已清空devOut缓存");
     }
 
     //不提供修改和删除方法
