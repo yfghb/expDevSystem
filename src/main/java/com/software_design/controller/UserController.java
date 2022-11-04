@@ -6,6 +6,7 @@ import com.software_design.service.UserService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 @RestController
 @RequestMapping("/user")
@@ -24,7 +25,8 @@ public class UserController {
      * @return R<User>
      */
     @GetMapping("/get/{account}")
-    public R<User> selectByAct(@PathVariable String account){
+    public R<User> selectByAct(HttpServletRequest request, @PathVariable String account){
+        request.getSession().setAttribute("user",account);
         return R.success(userService.selectByAct(account));
     }
 
