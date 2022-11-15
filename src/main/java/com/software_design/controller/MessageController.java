@@ -27,7 +27,7 @@ public class MessageController {
         Page<Message> pageInfo = new Page<>(page,pageSize);
         LambdaQueryWrapper<Message> lqw = new LambdaQueryWrapper<>();
 
-        lqw.eq(name!=null,Message::getUserName,name);
+        lqw.like(name!=null,Message::getUserName,name);
         lqw.orderByAsc(Message::getCreateTime);
         messageService.page(pageInfo,lqw);
         return R.success(pageInfo);

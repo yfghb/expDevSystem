@@ -19,21 +19,21 @@ public class CacheClearTask {
     private DeviceController deviceController;
 
     @Async
-    @Scheduled(cron = "0 1 * * * ?")
+    @Scheduled(cron = "0 10 * * * ?")
     public void devInCacheTask(){
         deviceController.clearDevIn();
         System.out.println("开始定时任务 : 清空缓存，现在时间：" + f.format(new Date()));
     }
 
     @Async
-    @Scheduled(cron = "0 1 * * * ?")
+    @Scheduled(cron = "0 10 * * * ?")
     public void devOutCacheTask(){
         deviceController.clearDevOut();
         System.out.println("开始定时任务 : 清空缓存，现在时间：" + f.format(new Date()));
     }
 
     @Async
-    @Scheduled(cron = "0 1 * * * ?")
+    @Scheduled(cron = "0 10 * * * ?")
     public void devStatusCacheTask(){
         deviceController.clearDevStatus();
         System.out.println("开始定时任务 : 清空缓存，现在时间：" + f.format(new Date()));
