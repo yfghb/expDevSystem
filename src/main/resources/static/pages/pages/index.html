@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <link rel="stylesheet" href="../css/message.css">
+</head>
+<body>
+<div id="block">
+
+    <el-header>实验室设备管理系统</el-header>
+    <el-container>
+        <el-aside width="200px">
+            <el-dropdown-item command="c">设备申请信息</el-dropdown-item>
+            <el-dropdown-item command="c">故障报废详情</el-dropdown-item>
+            <el-dropdown >
+<!--       <span class="el-dropdown-link">-->
+<!--             基本设备信息<i class="el-icon-arrow-down el-icon&#45;&#45;right"></i>-->
+<!-- </span>-->
+<!--                <el-dropdown-menu slot="dropdown">-->
+                    <el-dropdown-item command="a">设备信息</el-dropdown-item>
+                    <el-dropdown-item command="b">添加设备</el-dropdown-item>
+                    <el-dropdown-item command="c">设备分类</el-dropdown-item>
+<!--                </el-dropdown-menu>-->
+            </el-dropdown>
+
+        </el-aside>
+        <el-main>
+            <template>
+                <el-table
+                        :data="tableData"
+                        style="width: 100%">
+                    <el-table-column
+                            prop="dev_id"
+                            label="id号"
+                            width="100">
+                    </el-table-column>
+                    <el-table-column
+                            prop="dev_name"
+                            label="设备名"
+                            width="100">
+                    </el-table-column>
+                    <el-table-column
+                            prop="type"
+                            label="类型"
+                            width="100">
+                    </el-table-column>
+                    <el-table-column
+                            prop="count"
+                            label="数量"
+                            width="100">
+                    </el-table-column>
+
+                    <el-table-column
+                            prop="id_broken"
+                            label="是否报废"
+                            width="100">
+                    </el-table-column>
+
+                    <el-table-column
+                            prop="is_intact"
+                            label="是否修理过"
+                            width="100">
+                    </el-table-column>
+
+                    <el-table-column
+                            prop="is_buy"
+                            label="已购买"
+                            width="100">
+                    </el-table-column>
+
+                    <el-table-column
+                            prop="create_time"
+                            label="购买时间"
+                            width="100">
+                    </el-table-column>
+                    <el-table-column
+                            prop="broken_time"
+                            label="报废时间"
+                            width="100">
+                    </el-table-column>
+
+                </el-table>
+            </template>
+            <el-pagination
+                    layout="prev, pager, next"
+                    :total="100">
+            </el-pagination>
+        </el-main>
+
+    </el-container>
+
+    <el-footer>Footer</el-footer>
+    </el-container>
+    </el-container>
+
+</div>
+<script src="../js/vue.js"></script>
+<!-- 引入组件库 -->
+<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+<script src="../js/axios-0.18.0.js"></script>
+<script src="../js/md5.js"></script>
+<script>
+var app=new Vue({
+     el:"#block",
+     data:{},
+
+})
+ </script>
+</body>
+</html>
